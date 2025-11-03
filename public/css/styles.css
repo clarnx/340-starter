@@ -163,6 +163,7 @@ main h1 {
 .hero-features li {
   padding-left: 0;
   margin-bottom: 0.25rem;
+  color: #000000;
 }
 
 .cta-button {
