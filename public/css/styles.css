@@ -284,6 +284,83 @@ main h1 {
   color: #001f24;
 }
 
+/******* Inventory Display Grid ***************/
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+#inv-display li {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inv-display li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#inv-display li a {
+  display: block;
+  text-decoration: none;
+}
+
+#inv-display li img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #ffffff;
+}
+
+#inv-display .namePrice {
+  padding: 1rem;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+#inv-display .namePrice hr {
+  border: none;
+  border-top: 2px solid #1a1a1a;
+  margin: 0 0 0.75rem 0;
+}
+
+#inv-display .namePrice h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  color: #0066cc;
+}
+
+#inv-display .namePrice h2 a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+#inv-display .namePrice h2 a:hover {
+  text-decoration: underline;
+}
+
+#inv-display .namePrice span {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.notice {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666666;
+}
+
 /******* Vehicle Detail ***************/
 .vehicle-detail {
   display: flex;
@@ -437,6 +514,11 @@ footer a {
   .vehicle-price {
     font-size: 1.75rem;
   }
+
+  #inv-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -458,5 +540,10 @@ footer a {
 
   .vehicle-image {
     flex: 0 0 45%;
+  }
+
+  #inv-display {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 }
