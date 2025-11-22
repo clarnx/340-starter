@@ -74,9 +74,33 @@ Util.getNav = async function (req, res, next) {
   return list;
 };
 
+/* ************************
+ * Build vehicle detail HTML
+ ************************** */
+Util.buildVehicleDetail = function (vehicle) {
+  if (!vehicle) {
+    return '<p class="notice">Sorry, vehicle not found.</p>';
+  }
+
+  let detail = '<div class="vehicle-detail">';
+  detail += '<div class="vehicle-image">';
+  detail += `<img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}">`;
+  detail += '</div>';
+  detail += '<div class="vehicle-info">';
+  detail += `<h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>`;
+  detail += `<p class="vehicle-price"><strong>Price: $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</strong></p>`;
+  detail += `<p class="vehicle-description"><strong>Description:</strong> ${vehicle.inv_description}</p>`;
+  detail += `<p class="vehicle-color"><strong>Color:</strong> ${vehicle.inv_color}</p>`;
+  detail += `<p class="vehicle-miles"><strong>Miles:</strong> ${new Intl.NumberFormat("en-US").format(vehicle.inv_miles)}</p>`;
+  detail += '</div>';
+  detail += '</div>';
+
+  return detail;
+};
+
 /* ****************************************
  * Middleware For Handling Errors
- * Wrap other function in this for 
+ * Wrap other function in this for
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)

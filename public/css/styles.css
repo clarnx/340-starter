@@ -284,6 +284,47 @@ main h1 {
   color: #001f24;
 }
 
+/******* Vehicle Detail ***************/
+.vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.vehicle-image {
+  width: 100%;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e0e0e0;
+}
+
+.vehicle-info {
+  width: 100%;
+}
+
+.vehicle-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.vehicle-price {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.vehicle-description,
+.vehicle-color,
+.vehicle-miles {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
 /******* Footer ***************/
 footer {
   padding: 1rem;
@@ -297,6 +338,12 @@ footer {
   margin: 0;
   font-size: 0.9rem;
   color: #666666;
+}
+
+footer a {
+  color: #0066cc;
+  text-decoration: underline;
+  font-size: 0.9rem;
 }
 
 /******* Media Query for Larger Screens ***************/
@@ -368,6 +415,28 @@ footer {
   .upgrade-item img {
     max-width: 150px;
   }
+
+  .vehicle-detail {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .vehicle-image {
+    flex: 0 0 50%;
+  }
+
+  .vehicle-info {
+    flex: 1;
+  }
+
+  .vehicle-info h2 {
+    font-size: 1.75rem;
+  }
+
+  .vehicle-price {
+    font-size: 1.75rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -385,5 +454,9 @@ footer {
 
   .upgrades-grid {
     gap: 2rem;
+  }
+
+  .vehicle-image {
+    flex: 0 0 45%;
   }
 }
