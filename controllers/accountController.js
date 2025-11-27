@@ -1,4 +1,4 @@
-const accountModel = require("../controllers/accountController")
+const accountModel = require("../models/account-model")
 const utilities = require("../utilities");
 
 /* ****************************************
@@ -56,4 +56,4 @@ async function registerAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister };
+module.exports = { buildLogin, buildRegister, registerAccount };
