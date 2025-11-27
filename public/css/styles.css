@@ -504,6 +504,31 @@ form {
   color: #e0e0e0;
 }
 
+.password-requirements {
+  font-size: 0.875rem;
+  color: #ffffff;
+  margin: 0.5rem 0 0 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.toggle-password {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-password:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 /******* Media Query for Larger Screens ***************/
 @media screen and (min-width: 768px) {
   #wrapper {
