@@ -1,10 +1,9 @@
 <h1><%- title %></h1>
 
-<p class="notice-text">Provide a correct classification name.</p>
-
 <%- messages() %>
 
 <% if (errors) { %>
+  <p class="notice-text">Provide a correct classification name.</p>
   <ul class="error-list">
   <% errors.array().forEach(error => { %>
     <li><%= error.msg %></li>
