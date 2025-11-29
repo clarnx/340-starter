@@ -22,11 +22,11 @@
 
     <div class="form-group">
       <label for="inv_make">Make</label>
-      <p class="input-help">Min of 3 characters</p>
       <input
         type="text"
         id="inv_make"
         name="inv_make"
+        placeholder="Min of 3 characters"
         required
         minlength="3"
         value="<%= locals.inv_make || '' %>">
@@ -34,11 +34,11 @@
 
     <div class="form-group">
       <label for="inv_model">Model</label>
-      <p class="input-help">Min of 3 characters</p>
       <input
         type="text"
         id="inv_model"
         name="inv_model"
+        placeholder="Min of 3 characters"
         required
         minlength="3"
         value="<%= locals.inv_model || '' %>">
@@ -75,11 +75,11 @@
 
     <div class="form-group">
       <label for="inv_price">Price</label>
-      <p class="input-help">decimal or integer</p>
       <input
         type="number"
         id="inv_price"
         name="inv_price"
+        placeholder="decimal or integer"
         required
         step="0.01"
         min="0"
@@ -88,11 +88,11 @@
 
     <div class="form-group">
       <label for="inv_year">Year</label>
-      <p class="input-help">4-digit year</p>
       <input
         type="text"
         id="inv_year"
         name="inv_year"
+        placeholder="4-digit year"
         required
         pattern="[0-9]{4}"
         maxlength="4"
@@ -101,11 +101,11 @@
 
     <div class="form-group">
       <label for="inv_miles">Miles</label>
-      <p class="input-help">digits only</p>
       <input
         type="number"
         id="inv_miles"
         name="inv_miles"
+        placeholder="digits only"
         required
         min="0"
         step="1"

@@ -469,7 +469,7 @@ form {
   background-color: #ffffff;
   color: #2c4050;
   border: none;
-  border-radius: 25px;
+  border-radius: 0;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -582,6 +582,14 @@ form {
 .input-help {
   font-size: 0.875rem;
   color: #1a1a1a;
+  font-style: italic;
+  margin: 0.25rem 0;
+  text-transform: uppercase;
+}
+
+.input-help-white {
+  font-size: 0.875rem;
+  color: #ffffff;
   font-style: italic;
   margin: 0.25rem 0;
   text-transform: uppercase;
