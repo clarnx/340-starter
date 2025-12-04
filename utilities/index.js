@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const invModel = require("../models/inventory-model");
 const Util = {};
 
@@ -85,15 +86,19 @@ Util.buildVehicleDetail = function (vehicle) {
   let detail = '<div class="vehicle-detail">';
   detail += '<div class="vehicle-image">';
   detail += `<img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}">`;
-  detail += '</div>';
+  detail += "</div>";
   detail += '<div class="vehicle-info">';
   detail += `<h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>`;
-  detail += `<p class="vehicle-price"><strong>Price: $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</strong></p>`;
+  detail += `<p class="vehicle-price"><strong>Price: $${new Intl.NumberFormat(
+    "en-US"
+  ).format(vehicle.inv_price)}</strong></p>`;
   detail += `<p class="vehicle-description"><strong>Description:</strong> ${vehicle.inv_description}</p>`;
   detail += `<p class="vehicle-color"><strong>Color:</strong> ${vehicle.inv_color}</p>`;
-  detail += `<p class="vehicle-miles"><strong>Miles:</strong> ${new Intl.NumberFormat("en-US").format(vehicle.inv_miles)}</p>`;
-  detail += '</div>';
-  detail += '</div>';
+  detail += `<p class="vehicle-miles"><strong>Miles:</strong> ${new Intl.NumberFormat(
+    "en-US"
+  ).format(vehicle.inv_miles)}</p>`;
+  detail += "</div>";
+  detail += "</div>";
 
   return detail;
 };
@@ -125,6 +130,30 @@ Util.buildClassificationList = async function (classification_id = null) {
  * Wrap other function in this for
  * General Error Handling
  **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+ if (req.cookies.jwt) {
+  jwt.verify(
+   req.cookies.jwt,
+   process.env.ACCESS_TOKEN_SECRET,
+   function (err, accountData) {
+    if (err) {
+     req.flash("Please log in")
+     res.clearCookie("jwt")
+     return res.redirect("/account/login")
+    }
+    res.locals.accountData = accountData
+    res.locals.loggedin = 1
+    next()
+   })
+ } else {
+  next()
+ }
+}
 
 module.exports = Util;
