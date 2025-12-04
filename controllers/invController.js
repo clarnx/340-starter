@@ -27,7 +27,7 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   const vehicle = await invModel.getVehicleByInventoryId(inv_id);
 
   if (!vehicle) {
-    const error = new Error('Vehicle not found');
+    const error = new Error("Vehicle not found");
     error.status = 404;
     return next(error);
   }
@@ -77,7 +77,10 @@ invCont.addClassification = async function (req, res, next) {
 
   if (addResult) {
     let nav = await utilities.getNav();
-    req.flash("notice", `The ${classification_name} classification was successfully added.`);
+    req.flash(
+      "notice",
+      `The ${classification_name} classification was successfully added.`
+    );
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav,
@@ -140,14 +143,19 @@ invCont.addInventory = async function (req, res, next) {
   );
 
   if (addResult) {
-    req.flash("notice", `The ${inv_year} ${inv_make} ${inv_model} was successfully added.`);
+    req.flash(
+      "notice",
+      `The ${inv_year} ${inv_make} ${inv_model} was successfully added.`
+    );
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav,
       errors: null,
     });
   } else {
-    let classificationList = await utilities.buildClassificationList(classification_id);
+    let classificationList = await utilities.buildClassificationList(
+      classification_id
+    );
     req.flash("notice", "Sorry, adding the vehicle failed.");
     res.status(501).render("./inventory/add-inventory", {
       title: "Add New Vehicle",
