@@ -79,6 +79,7 @@ invCont.addClassification = async function (req, res, next) {
 
   if (addResult) {
     let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash(
       "notice",
       `The ${classification_name} classification was successfully added.`
@@ -86,6 +87,7 @@ invCont.addClassification = async function (req, res, next) {
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav,
+      classificationSelect,
       errors: null,
     });
   } else {
@@ -145,6 +147,7 @@ invCont.addInventory = async function (req, res, next) {
   );
 
   if (addResult) {
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash(
       "notice",
       `The ${inv_year} ${inv_make} ${inv_model} was successfully added.`
@@ -152,6 +155,7 @@ invCont.addInventory = async function (req, res, next) {
     res.status(201).render("./inventory/management", {
       title: "Vehicle Management",
       nav,
+      classificationSelect,
       errors: null,
     });
   } else {
@@ -173,7 +177,9 @@ invCont.addInventory = async function (req, res, next) {
  * ************************** */
 invCont.getInventoryJSON = async (req, res, next) => {
   const classification_id = parseInt(req.params.classification_id);
-  const invData = await invModel.getInventoryByClassificationId(classification_id);
+  const invData = await invModel.getInventoryByClassificationId(
+    classification_id
+  );
   if (invData[0].inv_id) {
     return res.json(invData);
   } else {
@@ -188,7 +194,9 @@ invCont.editInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
   const itemData = await invModel.getVehicleByInventoryId(inv_id);
-  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id);
+  const classificationSelect = await utilities.buildClassificationList(
+    itemData.classification_id
+  );
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
@@ -205,7 +213,7 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_price: itemData.inv_price,
     inv_miles: itemData.inv_miles,
     inv_color: itemData.inv_color,
-    classification_id: itemData.classification_id
+    classification_id: itemData.classification_id,
   });
 };
 
@@ -246,7 +254,9 @@ invCont.updateInventory = async function (req, res, next) {
     req.flash("notice", `The ${itemName} was successfully updated.`);
     res.redirect("/inv/");
   } else {
-    const classificationSelect = await utilities.buildClassificationList(classification_id);
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
     const itemName = `${inv_make} ${inv_model}`;
     req.flash("notice", "Sorry, the insert failed.");
     res.status(501).render("inventory/edit-inventory", {
@@ -264,7 +274,7 @@ invCont.updateInventory = async function (req, res, next) {
       inv_price,
       inv_miles,
       inv_color,
-      classification_id
+      classification_id,
     });
   }
 };
@@ -285,7 +295,7 @@ invCont.deleteInventoryView = async function (req, res, next) {
     inv_make: itemData.inv_make,
     inv_model: itemData.inv_model,
     inv_year: itemData.inv_year,
-    inv_price: itemData.inv_price
+    inv_price: itemData.inv_price,
   });
 };
 

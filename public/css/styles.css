@@ -89,6 +89,12 @@ a:hover {
   color: #0066cc;
 }
 
+#tools {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 #tools a {
   color: #1a1a1a;
   font-size: 0.95rem;
