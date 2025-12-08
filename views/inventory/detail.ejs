@@ -1,3 +1,30 @@
 <h1><%- title %></h1>
 
+<%- messages() %>
+
 <%- vehicleHTML %>
+
+<div class="favorite-action">
+  <% if (locals.loggedin) { %>
+    <% if (isFavorite) { %>
+      <form action="/favorites/remove" method="post" class="favorite-form">
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+        <input type="hidden" name="returnTo" value="detail">
+        <button type="submit" class="btn-favorite btn-remove">
+          <span class="heart-icon filled">&hearts;</span> Remove from Favorites
+        </button>
+      </form>
+    <% } else { %>
+      <form action="/favorites/add" method="post" class="favorite-form">
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+        <button type="submit" class="btn-favorite btn-add">
+          <span class="heart-icon">&#9825;</span> Add to Favorites
+        </button>
+      </form>
+    <% } %>
+  <% } else { %>
+    <p class="login-prompt">
+      <a href="/account/login">Log in</a> to save this vehicle to your favorites.
+    </p>
+  <% } %>
+</div>

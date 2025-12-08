@@ -1,0 +1,24 @@
+<h1><%- title %></h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+<ul class="error-list">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="favorites-container">
+  <p class="favorites-intro">
+    Your saved vehicles are listed below. Click on a vehicle to view details or remove it from your favorites.
+  </p>
+  
+  <%- favoritesGrid %>
+</div>
+
+<div class="favorites-actions">
+  <a href="/" class="btn-secondary">Continue Browsing</a>
+</div>
+

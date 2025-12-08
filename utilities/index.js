@@ -125,6 +125,78 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList;
 };
 
+/* ************************
+ * Build favorites grid HTML
+ ************************** */
+Util.buildFavoritesGrid = async function (data) {
+  let grid;
+  if (data.length > 0) {
+    grid = '<ul id="favorites-display">';
+    data.forEach((vehicle) => {
+      grid += '<li class="favorite-item">';
+      grid +=
+        '<a href="/inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' details"><img src="' +
+        vehicle.inv_thumbnail +
+        '" alt="Image of ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        '" /></a>';
+      grid += '<div class="favorite-info">';
+      grid += "<h2>";
+      grid +=
+        '<a href="/inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' details">' +
+        vehicle.inv_year +
+        " " +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        "</a>";
+      grid += "</h2>";
+      grid +=
+        '<p class="favorite-price">$' +
+        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
+        "</p>";
+      grid +=
+        '<p class="favorite-date">Added: ' +
+        new Date(vehicle.date_added).toLocaleDateString() +
+        "</p>";
+      grid +=
+        '<form action="/favorites/remove" method="post" class="remove-favorite-form">';
+      grid +=
+        '<input type="hidden" name="inv_id" value="' + vehicle.inv_id + '">';
+      grid += '<input type="hidden" name="returnTo" value="list">';
+      grid +=
+        '<button type="submit" class="btn-remove-favorite" title="Remove from favorites">';
+      grid += '<span class="heart-icon filled">&hearts;</span> Remove';
+      grid += "</button>";
+      grid += "</form>";
+      grid += "</div>";
+      grid += "</li>";
+    });
+    grid += "</ul>";
+  } else {
+    grid =
+      '<div class="no-favorites">' +
+      "<p>You haven't added any vehicles to your favorites yet.</p>" +
+      '<p><a href="/">Browse our inventory</a> and click the heart icon to save vehicles you like!</p>' +
+      "</div>";
+  }
+  return grid;
+};
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for

@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const favoritesModel = require("../models/favorites-model");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -36,10 +37,21 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   let nav = await utilities.getNav();
   const vehicleTitle = `${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}`;
 
+  // Check if vehicle is in user's favorites (if logged in)
+  let isFavorite = false;
+  if (res.locals.loggedin) {
+    isFavorite = await favoritesModel.checkFavorite(
+      res.locals.accountData.account_id,
+      inv_id
+    );
+  }
+
   res.render("./inventory/detail", {
     title: vehicleTitle,
     nav,
     vehicleHTML,
+    inv_id,
+    isFavorite,
   });
 };
 
